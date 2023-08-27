@@ -1,0 +1,32 @@
+﻿{
+    "Id": 1,
+    "Patient": {
+        "Id": 1,
+        "LastName": "Schmidt",
+        "Firstname": "Liza",
+        "BirthDate": "1974-04-04T00:00:00",
+        "PatientAdresses": [
+            {
+                "Id": 1,
+                "Street": "Telomer Str",
+                "Nr": "3",
+                "Plz": "01425",
+                "City": "DD"
+            }
+        ]
+    },
+    "MedicalRecordEntries": [
+        {
+            "Id": 1,
+            "LastVisitDoc": "2023-12-23T00:00:00",
+            "MedicalReason": "Schnupfen",
+            "MedicalRecordEntryDocuments": [
+                {
+                    "Id": 1,
+                    "Name": "Krankenschein 2023 1 12",
+                    "Type": 1
+                }
+            ]
+        }
+    ]
+}

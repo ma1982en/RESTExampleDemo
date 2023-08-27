@@ -8,8 +8,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9"/>
+        <PackageReference Include="RiskFirst.Hateoas" Version="3.1.1" />
+        <PackageReference Include="RiskFirst.Hateoas.Models" Version="3.1.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
+
 
     <ItemGroup>
       <Folder Include="Models\API\" />

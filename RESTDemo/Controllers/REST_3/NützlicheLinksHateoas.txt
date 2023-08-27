@@ -1,4 +1,0 @@
-﻿Gestaltung einer Hateoas API
-https://baldbeardedbuilder.com/blog/adding-hateoas-to-an-asp-net-core-api/
-Hatoas nuget package
-https://github.com/icarotorres/HateoasNet/wiki

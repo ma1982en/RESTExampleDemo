@@ -1,6 +1,8 @@
+using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using RESTDemo.Models.Internal;
 
 namespace RESTDemo.Test;
@@ -12,14 +14,39 @@ public class ModelGenerationTest
     public void GenerateXmlTestData()
     {
         //arrange
+        var medicalRecord = GetExampleMedicalRecord();
+        
+        //act
+        //assert
+        var xmlWriter = XmlWriter.Create(Console.Out);
+        var xmlSerializer = new XmlSerializer(typeof(MedicalRecord));
+        xmlSerializer.Serialize(xmlWriter,medicalRecord);
+    }
 
+    [TestMethod]
+    public void GenerateJsonTestDate()
+    {
+        //arrange
+        var medicalRecord = GetExampleMedicalRecord();
+        
+        //act
+        var serializeObject = JsonConvert.SerializeObject(medicalRecord);
+        //assert
+        
+        Console.Write(serializeObject);
+        
+        
+    }
+
+    private static MedicalRecord GetExampleMedicalRecord()
+    {
         var medicalRecordEntryDocument = new MedicalRecordEntryDocument
         {
             Id = 1,
             Name = "Krankenschein 2023 1 12",
             Type = MedicalRecordEntryDocumentType.Krankenschein
         };
-        
+
         var medicalRecordEntry = new MedicalRecordEntry
         {
             Id = 1,
@@ -52,10 +79,6 @@ public class ModelGenerationTest
             Patient = patient
         };
         medicalRecord.MedicalRecordEntries.Add(medicalRecordEntry);
-
-        
-        var xmlWriter = XmlWriter.Create(Console.Out);
-        var xmlSerializer = new XmlSerializer(typeof(MedicalRecord));
-        xmlSerializer.Serialize(xmlWriter,medicalRecord);
+        return medicalRecord;
     }
 }

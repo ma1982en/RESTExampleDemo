@@ -1,11 +1,24 @@
 using Microsoft.OpenApi.Models;
 using RESTDemo;
-using RESTDemo.Models;
+using RESTDemo.Contracts;
 using RESTDemo.Models.Internal;
+using RESTDemo.Services;
+using RiskFirst.Hateoas;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLinks(config =>
+{
+    config.AddPolicy<MedicalRecord>(policy => {
+        policy
+            .RequireSelfLink()
+            .RequireRoutedLink("update", "UpdateModelsRoute", x=> new { mid = x.Id})
+            .RequireRoutedLink("delete", "DeleteModelRoute", x => new { mid = x.Id });
+    });
+});
+
+builder.Services.AddSingleton<IMedicalRecord, MedicalRecordHandler>();
 
 builder.Services.AddControllers(options =>
     {
