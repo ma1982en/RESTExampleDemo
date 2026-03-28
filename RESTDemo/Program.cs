@@ -1,8 +1,12 @@
-using Microsoft.OpenApi.Models;
+using FreeMediator;
+using Microsoft.OpenApi;
 using RESTDemo;
 using RESTDemo.Contracts;
+using RESTDemo.Handlers;
+using RESTDemo.Models.API;
 using RESTDemo.Models.Internal;
 using RESTDemo.Services;
+using RESTDemo.Validations;
 using RiskFirst.Hateoas;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,7 +38,14 @@ builder.Services.AddSwaggerGen(configur =>
     configur.SwaggerDoc(Const.Level1Definition, new OpenApiInfo { Title = "REST Level 1", Version = "v1" });
     configur.SwaggerDoc(Const.Level2Definition, new OpenApiInfo { Title = "REST Level 2", Version = "v1" });
     configur.SwaggerDoc(Const.Level3Definition, new OpenApiInfo { Title = "REST Level 3", Version = "v1" });
+    configur.SwaggerDoc(Const.LevelMediatorDefinition, new OpenApiInfo { Title = "REST Mediator", Version = "v1" });
 
+});
+
+builder.Services.AddMediator(config =>
+{
+    config.RegisterServicesFromAssemblyContaining<PatientQuery>();
+    config.AddBehavior<ValidationBehavior>();
 });
 
 var app = builder.Build();
@@ -50,6 +61,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint($"/swagger/{Const.Level1Definition}/swagger.json", Const.Level1Definition); 
         c.SwaggerEndpoint($"/swagger/{Const.Level2Definition}/swagger.json", Const.Level2Definition); 
         c.SwaggerEndpoint($"/swagger/{Const.Level3Definition}/swagger.json", Const.Level3Definition); 
+        c.SwaggerEndpoint($"/swagger/{Const.LevelMediatorDefinition}/swagger.json", Const.LevelMediatorDefinition);
 
     });
 }

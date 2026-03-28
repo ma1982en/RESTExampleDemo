@@ -6,4 +6,5 @@ public static class Const
     public const string Level1Definition = "LEVEL1";
     public const string Level2Definition = "LEVEL2";
     public const string Level3Definition = "LEVEL3";
+    public const string LevelMediatorDefinition = "MEDIATOR";
 }
